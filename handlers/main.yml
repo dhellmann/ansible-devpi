@@ -1,2 +1,4 @@
 ---
-# handlers file for devpi
+- name: restart monit
+  service: name=monit state=restarted
+  sudo: yes

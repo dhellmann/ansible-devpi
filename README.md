@@ -1,22 +1,42 @@
-Role Name
-=========
+devpi
+=====
 
-A brief description of the role goes here.
+Deploy a devpi server (https://pypi.python.org/pypi/devpi) for caching
+downloads from the Python Package Index and configures pip to use it
+and store wheels in a local wheelhouse.
+
+Installs monit and configures it to keep devpi running.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+The role uses virtualenv does not install it because different
+developers may want to have it installed from different sources. In
+*most* cases, it should be installed from source, but some people
+still like to use the system package.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+* devpi_virtualenv
+
+  The full path to the virtualenv that should be created for
+  installing devpi. Defaults to ~/.virtualenvs/devpi.
+
+* devpi_port
+
+  The port number on which the devpi server should listen. Defaults to
+  3141. Always listens on localhost.
+
+* devpi_wheelhouse
+
+  The directory used for pip's wheelhouse cache. Defaults to
+  ~/.pip/wheelhouse.
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+None
 
 Example Playbook
 ----------------
@@ -25,7 +45,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - devpi
 
 License
 -------
@@ -35,4 +55,4 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Doug Hellmann
