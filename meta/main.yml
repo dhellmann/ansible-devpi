@@ -1,8 +1,8 @@
 ---
 galaxy_info:
-  author: your name
-  description: 
-  company: your company (optional)
+  author: Doug Hellmann
+  description: Deploys a devpi server for caching downloads from the Python Package Index.
+  #company: your company (optional)
   # Some suggested licenses:
   # - BSD (default)
   # - MIT
@@ -10,8 +10,8 @@ galaxy_info:
   # - GPLv3
   # - Apache
   # - CC-BY
-  license: license (GPLv2, CC-BY, etc)
-  min_ansible_version: 1.2
+  license: BSD
+  min_ansible_version: 1.8.2
   #
   # Below are all platforms currently available. Just uncomment
   # the ones that apply to your role. If you don't see your 
@@ -24,10 +24,10 @@ galaxy_info:
   #  - 5
   #  - 6
   #  - 7
-  #- name: GenericUNIX
-  #  versions:
-  #  - all
-  #  - any
+  - name: GenericUNIX
+    versions:
+    - all
+    - any
   #- name: Fedora
   #  versions:
   #  - all
@@ -105,7 +105,7 @@ galaxy_info:
   # Below are all categories currently available. Just as with
   # the platforms above, uncomment those that apply to your role.
   #
-  #categories:
+  categories:
   #- cloud
   #- cloud:ec2
   #- cloud:gce
@@ -114,7 +114,7 @@ galaxy_info:
   #- database
   #- database:nosql
   #- database:sql
-  #- development
+  - development
   #- monitoring
   #- networking
   #- packaging
