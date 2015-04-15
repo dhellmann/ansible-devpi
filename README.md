@@ -10,7 +10,7 @@ Installs monit and configures it to keep devpi running.
 Requirements
 ------------
 
-The role uses virtualenv does not install it because different
+The role uses virtualenv but does not install it because different
 developers may want to have it installed from different sources. In
 *most* cases, it should be installed from source, but some people
 still like to use the system package.
