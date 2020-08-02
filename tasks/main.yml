@@ -1,29 +1,43 @@
 ---
-- name: Create devpi virtualenv
-  command: virtualenv {{devpi_virtualenv}}
-           creates={{devpi_virtualenv}}
+- name: Create devpi virtualenv # noqa 301
+  command: "virtualenv {{ devpi_virtualenv }}"
+  creates: "{{ devpi_virtualenv }}"
+
 - name: Install packages
-  pip: name={{item}}
-       virtualenv={{devpi_virtualenv}}
-       state=present
-  with_items:
-    - devpi
-    - wheel
+  pip:
+    name:
+      - devpi
+      - wheel
+    virtualenv: "{{ devpi_virtualenv }}"
+    state: present
+
 - name: Install monit
-  apt: name=monit state=latest
-  sudo: yes
+  become: yes
+  apt:
+    name: monit
+    state: latest
+
 - name: Make sure monit is running
-  service: name=monit state=running enabled=yes
-  sudo: yes
+  become: yes
+  service:
+    name: monit
+    state: running
+    enabled: yes
+
 - name: Configure monit to run devpi
-  sudo: yes
-  template: src=devpi-monit.conf
-            dest=/etc/monit/conf.d/devpi.conf
+  become: yes
+  template:
+    src: devpi-monit.conf
+    dest: /etc/monit/conf.d/devpi.conf
   notify:
     - restart monit
+
 - name: Create ~/.pip/wheelhouse
-  file: path={{devpi_wheelhouse}}
-        state=directory
+  file:
+    path: "{{ devpi_wheelhouse }}"
+    state: directory
+
 - name: ~/.pip.conf
-  template: src=pip.conf
-            dest={{ansible_env.HOME}}/.pip/pip.conf
+  template:
+    src: pip.conf
+    dest: "{{ ansible_env.HOME }}/.pip/pip.conf"
